@@ -1,10 +1,10 @@
 import './App.css'
-import PersonalInfo from './form/PersonalInfo'
+import MulitStepForm from './form/MulitStepForm'
 function App() {
 
   return (
     <div className='center'>
-    <PersonalInfo/>
+    <MulitStepForm/>
     </div>
   )
 }

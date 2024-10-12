@@ -1,44 +1,52 @@
-import './PersonalInfo.css'
-import Steps from './Steps';
-function Form() {
-    return (
-        <>
-            <div className='container'>
-                <div className='steps'>
-                    <Steps stepNumber='1' stepTitle='STEP 1' stepDesc='YOUR INFO'/>
-                    <Steps stepNumber='2' stepTitle='STEP 2' stepDesc='SELECT PLAN'/>
-                    <Steps stepNumber='3' stepTitle='STEP 3' stepDesc='ADD-ONS'/>
-                    <Steps stepNumber='4' stepTitle='STEP 4' stepDesc='SUMMARY'/>
-                </div>
-                <div className='form'>
-                    <div>
-                        <h1>Personal info</h1>
-                        <p>Please provide your name, email address, and phone number.</p>
-                    </div>
-                    <form>
-                        <div className='input-field'>
-                            <label htmlFor="fullName">Name</label>
-                            <input type="text" id='fullName' name='fullName' />
-                        </div>
-                        <div className='input-field'>
-                            <label htmlFor="email">Email Address</label>
-                            <input type="email" id='email' name='email' />
+import FormWrapper from './FormWrapper';
+// import './PersonalInfo.css';
 
-                        </div>
-                        <div className='input-field'>
-                            <label htmlFor="tel">Phone Number</label>
-                            <input type="tel" id='tel' name='tel' />
-                        </div>
+type UserData = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+};
 
-                        <div className='btn'>
-                            <button>Next Step</button>
-                        </div>
-                    </form>
+type UserFormProps = UserData & {
+  updateFields: (fields: Partial<UserData>) => void;
+};
 
-                </div>
+function PersonalInfo({ name, email, phoneNumber, updateFields }: UserFormProps) {
+  return (
+    <FormWrapper title="Personal Info" info="Please provide your name, email address, and phone number.">
+      <div className='form'>
+        <div className="input-field">
+          <label htmlFor="fullName">Name</label>
+          <input
+            type="text"
+            id="fullName"
+            value={name}
+            onChange={e => updateFields({ name: e.target.value })}
+          />
+        </div>
+        <div className="input-field">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={e => updateFields({ email: e.target.value })}
+          />
+        </div>
+        <div className="input-field">
+          <label htmlFor="tel">Phone Number</label>
+          <input
+            type="tel"
+            id="tel"
+            placeholder="e.g. +1 237 567 89"
+            value={phoneNumber}
+            onChange={e => updateFields({ phoneNumber: e.target.value })}
+          />
+        </div>
+      </div>
 
-            </div>
-        </>
-    )
+    </FormWrapper>
+  );
 }
-export default Form;
+
+export default PersonalInfo;
